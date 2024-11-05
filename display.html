@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Dados do Formulário</title>
+    <style>
+        /* Estilos para a página de exibição */
+        .display-container {
+            background-color: #1c1c1e;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(180, 62, 127, 0.3), 0 0 40px rgba(180, 62, 127, 0.2);
+            width: 100%;
+            max-width: 800px;
+            margin: 40px auto;
+            color: #ffffff;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: rgb(180, 62, 127);
+            text-shadow: 0 0 10px rgba(180, 62, 127, 0.8);
+        }
+
+        .info {
+            margin-bottom: 15px;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .info strong {
+            color: rgb(180, 62, 127);
+        }
+    </style>
+</head>
+<body>
+    <div class="display-container">
+        <h1>Dados Preenchidos</h1>
+
+        <div class="info"><strong>Nome:</strong> <span id="display-name"></span></div>
+        <div class="info"><strong>Endereço:</strong> <span id="display-address"></span></div>
+        <div class="info"><strong>Cidade:</strong> <span id="display-city"></span></div>
+        <div class="info"><strong>Estado:</strong> <span id="display-state"></span></div>
+        <div class="info"><strong>Área de Interesse:</strong> <span id="display-interesse"></span></div>
+        <div class="info"><strong>Natureza do Cargo:</strong> <span id="display-cargo"></span></div>
+        <div class="info"><strong>Mini-currículo:</strong> <span id="display-curriculo"></span></div>
+    </div>
+
+    <script>
+        // Função para capturar os parâmetros da URL
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                name: params.get('name') || '',
+                address: params.get('address') || '',
+                city: params.get('city') || '',
+                state: params.get('state') || '',
+                interesse: params.getAll('interesse').join(', ') || 'Nenhum interesse selecionado',
+                cargo: params.get('cargo') || 'Nenhum cargo selecionado',
+                curriculo: params.get('curriculo') || ''
+            };
+        }
+
+        // Função para exibir os dados capturados na página
+        function displayFormData() {
+            const formData = getQueryParams();
+
+            document.getElementById('display-name').textContent = formData.name;
+            document.getElementById('display-address').textContent = formData.address;
+            document.getElementById('display-city').textContent = formData.city;
+            document.getElementById('display-state').textContent = formData.state;
+            document.getElementById('display-interesse').textContent = formData.interesse;
+            document.getElementById('display-cargo').textContent = formData.cargo;
+            document.getElementById('display-curriculo').textContent = formData.curriculo;
+        }
+
+        // Executa a função ao carregar a página
+        window.onload = displayFormData;
+    </script>
+</body>
+</html>
